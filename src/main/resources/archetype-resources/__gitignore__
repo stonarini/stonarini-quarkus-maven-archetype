@@ -83,6 +83,7 @@ nb-configuration.xml
 ##############################
 .vscode/
 .code-workspace
+.factorypath
 
 ##############################
 # OS X
@@ -93,6 +94,7 @@ nb-configuration.xml
 # Vim
 ##############################
 *.swo
+*.swp
 
 ##############################
 # patch

@@ -1,8 +1,14 @@
-<archetype-descriptor xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 https://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="stonarini-maven-archetype">
+<archetype-descriptor xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 https://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="stonarini-quarkus-maven-archetype">
 
     <requiredProperties>
         <requiredProperty key="gitignore">
             <defaultValue>.gitignore</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="dockerignore">
+            <defaultValue>.dockerignore</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="mvn">
+            <defaultValue>.mvn</defaultValue>
         </requiredProperty>
         <requiredProperty key="mantainer">
             <defaultValue>stonarini@cifpfbmoll.eu</defaultValue>
@@ -26,8 +32,25 @@
             <directory></directory>
             <includes>
                 <include>__gitignore__</include>
-                <include>Dockerfile</include>
+                <include>__dockerignore__</include>
+                <include>README.md</include>
             </includes>
+        </fileSet>
+        <fileSet filtered="false">
+            <directory></directory>
+            <includes>
+                <include>mvnw</include>
+                <include>mvnw.cmd</include>
+            </includes>
+        </fileSet>
+        <fileSet filtered="false">
+            <directory>src/main/docker</directory>
+        </fileSet>
+        <fileSet filtered="true">
+            <directory>src/main/resources</directory>
+        </fileSet>
+        <fileSet filtered="false">
+            <directory>__mvn__</directory>
         </fileSet>
     </fileSets>
 </archetype-descriptor>
