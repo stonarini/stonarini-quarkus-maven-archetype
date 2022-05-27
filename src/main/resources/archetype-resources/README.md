@@ -1,11 +1,11 @@
 # ${artifactId}
 
-## Programación DAW Dual
+${h2} Programación DAW Dual
 
-## Key-Concepts :dart: 
+${h2} Key-Concepts :dart: 
 - Nokia
 - Motorola
 - BlackBerry
 
-## UML
+${h2} UML
 ![Custom UML](${artifactId}_UML.png)

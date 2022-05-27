@@ -13,6 +13,12 @@
         <requiredProperty key="mantainer">
             <defaultValue>stonarini@cifpfbmoll.eu</defaultValue>
         </requiredProperty>
+        <requiredProperty key="username">
+            <defaultValue>stonarini</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="h2">
+            <defaultValue>##</defaultValue>
+        </requiredProperty>
     </requiredProperties>
 
     <fileSets>
@@ -33,6 +39,7 @@
             <includes>
                 <include>__gitignore__</include>
                 <include>__dockerignore__</include>
+                <include>docker-native</include>
                 <include>README.md</include>
             </includes>
         </fileSet>

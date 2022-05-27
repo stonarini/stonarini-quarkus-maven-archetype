@@ -12,7 +12,7 @@ public class AppResourceTest {
     @Test
     public void firstTest() {
         given()
-        .when().get("/app")
+        .when().get("/")
         .then()
            .statusCode(200)
            .body(is("Quarkus is working!"));

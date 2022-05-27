@@ -1,0 +1,24 @@
+#!/bin/sh
+
+RUNNING=$(pgrep -x dockerd)
+
+if [ -z "$RUNNING" ]; then
+	echo "ERROR: Docker is not running"
+	exit 1
+fi
+
+./mvnw clean package -Pnative \
+	-Dquarkus.native.container-build=true \
+	-Dquarkus.container-image.build=true \
+	-Dquarkus.container-image.group=${username} \
+	-Dquarkus.container-image.additional-tags=latest
+
+read -p "PROMPT: Push Image to DockerHub? [Y/n]: " REPLY
+if [ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ]; then
+	docker push -a ${username}/${artifactId}
+fi
+
+read -p "PROMPT: Run Docker Image? [Y/n]: " REPLY
+if [ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ]; then
+	docker run --rm --name ${artifactId} -p 8080:8080 ${username}/${artifactId}
+fi

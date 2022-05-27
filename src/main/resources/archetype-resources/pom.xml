@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>${artifactId}</name>
-    <url>https://www.github.com/stonarini/${artifactId}</url>
+    <url>https://www.github.com/${username}/${artifactId}</url>
 
     <properties>
         <!-- FIXME change it to the project's main class -->
@@ -235,7 +235,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${surefire-plugin.version}</version>
+                        <version>3.0.0-M5</version>
                         <executions>
                             <execution>
                                 <goals>
