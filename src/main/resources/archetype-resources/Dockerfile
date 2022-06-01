@@ -1,0 +1,12 @@
+FROM openjdk:11.0-jre-slim-buster
+
+WORKDIR /home/h2
+RUN  apt-get update \
+  && apt-get install -y wget \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN wget https://search.maven.org/remotecontent?filepath=com/h2database/h2/2.1.212/h2-2.1.212.jar
+
+RUN mv remotecontent?filepath=com%2Fh2database%2Fh2%2F2.1.212%2Fh2-2.1.212.jar h2-2.1.212.jar
+
+ENTRYPOINT java -cp h2*.jar org.h2.tools.Server -webAllowOthers

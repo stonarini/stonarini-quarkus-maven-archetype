@@ -13,6 +13,11 @@ fi
 	-Dquarkus.container-image.group=${username} \
 	-Dquarkus.container-image.additional-tags=latest
 
+if [ $? -ne 0 ]; then
+	echo "ERROR: Error During Creation of Image"
+	exit 1
+fi
+
 read -p "PROMPT: Push Image to DockerHub? [Y/n]: " REPLY
 if [ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ]; then
 	docker push -a ${username}/${artifactId}
