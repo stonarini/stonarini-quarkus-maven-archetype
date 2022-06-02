@@ -10,6 +10,7 @@ fi
 ./mvnw clean package -Pnative \
 	-Dquarkus.native.container-build=true \
 	-Dquarkus.container-image.build=true \
+    -Dquarkus.native.native-image-xmx=8g \
 	-Dquarkus.container-image.group=${username} \
 	-Dquarkus.container-image.additional-tags=latest
 
@@ -23,7 +24,12 @@ if [ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ]; then
 	docker push -a ${username}/${artifactId}
 fi
 
-read -p "PROMPT: Run Docker Image? [Y/n]: " REPLY
+read -p "PROMPT: Run Dockerized Image? (docker-compose needed) [Y/n]: " REPLY
 if [ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ]; then
-	docker run --rm --name ${artifactId} -p 8080:8080 ${username}/${artifactId}
+    docker compose >/dev/null
+    if [ $? -ne 0 ]; then
+	    echo "ERROR: Docker Compose is not Installed"
+	    exit 1
+    fi
+    docker compose up -d
 fi
