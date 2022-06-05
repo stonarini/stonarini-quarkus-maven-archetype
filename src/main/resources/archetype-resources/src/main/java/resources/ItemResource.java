@@ -1,6 +1,8 @@
 package ${package}.resources;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,17 +34,22 @@ public class ItemResource {
     @Path("{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response get(@PathParam("name") String name) {
-        return Response.ok(itemService.get(name)).build();
+        Item item = itemService.get(name);
+        return item.getName().isEmpty() ? 
+            Response.status(Response.Status.NOT_FOUND).build():
+            Response.status(Response.Status.OK).entity(item).build();  
     }
 
     @POST
+    @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response create(Item item) {
+    public Response create(@Valid Item item) {
         return Response.status(Status.CREATED).entity(itemService.create(item)).build();
     }
 
     @PUT
+    @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(Item item) {
@@ -50,6 +57,7 @@ public class ItemResource {
     }
 
     @DELETE
+    @Transactional
     @Path("{name}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("name") String name) {

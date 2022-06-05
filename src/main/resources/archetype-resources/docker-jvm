@@ -7,13 +7,11 @@ if [ -z "$RUNNING" ]; then
 	exit 1
 fi
 
-./mvnw clean package -Pnative \
-	-Dquarkus.profile=native \
-	-Dquarkus.native.container-build=true \
+./mvnw clean package \
 	-Dquarkus.container-image.build=true \
     -Dquarkus.native.native-image-xmx=8g \
 	-Dquarkus.container-image.group=${username} \
-	-Dquarkus.container-image.additional-tags=native
+	-Dquarkus.container-image.additional-tags=latest
 
 if [ $? -ne 0 ]; then
 	echo "ERROR: Error During Creation of Image"
@@ -25,12 +23,7 @@ if [ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ]; then
 	docker push -a ${username}/${artifactId}
 fi
 
-read -p "PROMPT: Run Dockerized Image? (docker-compose needed) [Y/n]: " REPLY
+read -p "PROMPT: Run Dockerized Image? [Y/n]: " REPLY
 if [ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ]; then
-    docker compose >/dev/null
-    if [ $? -ne 0 ]; then
-	    echo "ERROR: Docker Compose is not Installed"
-	    exit 1
-    fi
-    docker compose up -d
+	docker run -d --name ${artifactId} -p 8080:8080 ${username}/${artifactId}
 fi

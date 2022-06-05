@@ -40,6 +40,7 @@
                 <include>__gitignore__</include>
                 <include>__dockerignore__</include>
                 <include>docker-native</include>
+                <include>docker-jvm</include>
                 <include>docker-compose.yaml</include>
                 <include>README.md</include>
             </includes>

@@ -1,7 +1,10 @@
 package ${package}.models;
 
+import javax.validation.constraints.NotNull;
+
 public class Item {
     private Long id;
+    @NotNull
     private String name;
     private Integer count;
     private String status;
